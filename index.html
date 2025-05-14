@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gachapon Alert Widget</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #C2E7F2;
+        }
+        .gachapon-container {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            background-image: url('./assets/gachapon-machine.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .gacha-ball {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #FFD3E3;
+            border-radius: 50%;
+            font-family: 'Baloo 2', cursive;
+            font-size: 18px;
+            color: #FF6F91;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: drop 2s ease-in-out forwards;
+        }
+        @keyframes drop {
+            0% { opacity: 0; transform: translateY(-200px) scale(0.5); }
+            50% { opacity: 1; transform: translateY(0px) scale(1.1); }
+            80% { transform: translateY(30px) scale(0.9); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gachapon-container" id="gachapon">
+        <div class="gacha-ball" id="gachaBall">Username</div>
+    </div>
+    <script>
+        function dropGachaBall(username) {
+            const ball = document.getElementById('gachaBall');
+            ball.textContent = username;
+            ball.style.top = '150px';
+            ball.style.left = '110px';
+            ball.style.opacity = 0;
+            ball.classList.remove('drop');
+            setTimeout(() => ball.classList.add('drop'), 100);
+            const audio = new Audio('./assets/gachapon-sound.mp3');
+            audio.play();
+        }
+        // Simulate an alert for testing
+        setTimeout(() => dropGachaBall('New Follower!'), 1000);
+    </script>
+</body>
+</html>
